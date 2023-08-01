@@ -3,7 +3,7 @@ import axios from 'axios';
 import router from '../../router/index';
 
 console.log(router);
-const token = localStorage.getItem('token')
+const token = sessionStorage.getItem('token')
 
 
 export const useStationsStore = defineStore('stationsStore', {

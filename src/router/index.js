@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
-
+const userIsLoggedIn=()=>{
+const token = sessionStorage.getItem('token')
+return token
+};
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,6 +22,16 @@ const router = createRouter({
           name: "dashboard",
           // redirect:'/stations',
           component: () => import('../views/DashBoard/DashBoardView.vue'),
+          beforeEnter: (to, from, next) => {
+            // Perform your logic here
+            if (userIsLoggedIn()) {
+              // User is logged in, proceed to the dashboard
+              next();
+            } else {
+              // User is not logged in, redirect to the login page or another route
+              next('/'); // Assuming you have a login route
+            }
+          },
           children:[
             {
               path: 'allusers',
@@ -137,10 +150,10 @@ const router = createRouter({
             },
           ]
         },
-        
-        
-        
+
   ]
+  
+
 })
 
 export default router

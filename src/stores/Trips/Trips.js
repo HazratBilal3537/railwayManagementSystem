@@ -7,7 +7,7 @@ import { createToaster } from "@meforma/vue-toaster";
 const toaster = createToaster({ /* options */ });
 
 
-const token = localStorage.getItem('token')
+const token = sessionStorage.getItem('token')
 let stationId = sessionStorage.getItem('stationId')
 
 console.log(router);

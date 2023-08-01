@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useRoute,useRouter } from "vue-router";
-const token = localStorage.getItem('token')
+const token = sessionStorage.getItem('token')
 
 export const useAuthStore = defineStore('authStore', {
     state: () => ({
@@ -24,7 +24,7 @@ export const useAuthStore = defineStore('authStore', {
                 console.log('login successful ', response.data);
                 // console.log('token',response.data.token);
                 if(response.data.data.role==='manager'){
-                    window.localStorage.setItem('token',response.data.token)
+                    window.sessionStorage.setItem('token',response.data.token)
                     // route.params.push({ path: '/dashboard' })
                  window.location.href='/dashboard'
                 }else{
