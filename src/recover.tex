@@ -1,0 +1,324 @@
+<template>
+    <!-- {{ stationsStore.stationsObject.station[0] }} -->
+    <!-- {{ userStore.usersObjec}} -->
+    {{stationName}}
+    <!-- {{stationsStore.stationsObject.station[0]._id}} -->
+    {{ driver }}
+
+    <div class="container-fluid px-1 py-1 my-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>👀********🐱‍🏍</h3>
+                <div class="card mt-4">
+                    <h5 class="text-center my-4">Update station</h5>
+                    <form class="form-card" onsubmit="event.preventDefault()">
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label
+                                    class="form-control-label px-3">Name<span class="text-danger"> *</span></label> <input
+                                    type="text" id="fname" name="fname" placeholder="Enter your first name"
+                                   v-model="stationsStore.stationsObject.station[0].name" > </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label
+                                    class="form-control-label px-3">location<span class="text-danger"> *</span></label> <input
+                                    type="text" id="Source" name="Source" placeholder="Enter your last name"
+                                    v-model="stationsStore.stationsObject.station[0].location"> </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label
+                                    class="form-control-label px-3">country<span class="text-danger"> *</span></label>
+                                <input type="text" id="country" name="country" placeholder="" v-model="stationsStore.stationsObject.station[0].country">
+                            </div>
+                            <!-- <div class="form-group col-sm-6 flex-column d-flex"> <label
+                                    class="form-control-label px-3">TotalSeats<span class="text-danger"> *</span></label>
+                                <input type="text" id="totalSeats" name="totalSeats" placeholder="" v-model="totalSeats">
+                            </div> -->
+                        </div>
+                        <!-- <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label
+                                    class="form-control-label px-3">Boxes<span class="text-danger"> *</span></label> <input
+                                    type="text" id="job" name="job" placeholder="" v-model="boxes"> </div>
+                            <div class="form-group col-sm-6 flex-column d-flex"> <label
+                                    class="form-control-label px-3">Color<span class="text-danger"> *</span></label> <input
+                                    type="text" id="job" name="job" placeholder="" v-model="color"> </div>
+                        </div> -->
+
+                        <!-- ``````````````````````````` Driver and security````````````````````````` -->
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column "> <label
+                                    class="form-control-label px-3">Driver<span class="text-danger"> *</span></label>
+                                    <select v-model="driver" class="form-select">
+                                    <option v-for="data in userStore.usersObjec.data" :value="data._id" >
+                                       
+                                        <span v-if="data.role=='driver'">{{data.name}}</span>
+
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column "> <label
+                                    class="form-control-label px-3">Security<span class="text-danger"> *</span></label>
+                                    <select v-model="security" class="form-select">
+                                        <option v-for="data in userStore.usersObjec.data" :value="data._id" >
+                                       
+                                            <span v-if="data.role=='security'">{{data.name}}</span>
+
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+
+                        <!-- ``````````````````````````` stationId and engineersId````````````````````````` -->
+
+                        <div class="row justify-content-between text-left my-3">
+                            <div class="form-group col-sm-6 flex-column "> <label
+                                    class="form-control-label px-3">manager<span class="text-danger"> *</span></label>
+                                <select v-model="manager" class="form-select">
+                                    <option v-for="data in userStore.usersObjec.data" :value="data._id" >
+                                       
+                                        <span v-if="data.role=='manager'">{{data.name}}</span>
+
+                                    
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column "> <label
+                                    class="form-control-label px-3">engineersId<span class="text-danger"> *</span></label>
+                                    <select v-model="engineer" class="form-select">
+                                        <option v-for="data in userStore.usersObjec.data" :value="data._id" key="data.id" >
+                                       
+                                        <span v-if="data.role=='engineer'">{{data.name}}</span>
+                                    
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- ```````````````````````````````````` is active ````````` -->
+                        <div class="row justify-content-between text-start">
+                            <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="stationsStore.stationsObject.station[0].isActive" id="Active">
+                                    <label class="form-check-label" for="Active">Active</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="stationsStore.stationsObject.station[0].security" id="Internet">
+                                    <label class="form-check-label" for="Internet">Security</label>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="airCondition" id="airCondition">
+                                    <label class="form-check-label" for="airCondition">airCondition</label>
+                                </div>
+                            </div> -->
+                        </div>
+                       
+                        <div class="row justify-content-between text-start">
+                            <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="stationsStore.stationsObject.station[0].canteen" id="goodsTaker">
+                                    <label class="form-check-label" for="goodsTaker">Canteen</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="stationsStore.stationsObject.station[0].restRoom" id="firstAid">
+                                    <label class="form-check-label" for="firstAid">RestRoom</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="stationsStore.stationsObject.station[0].emergencyRoom" id="familySeats">
+                                    <label class="form-check-label" for="familySeats">EmergencyRoom</label>
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group col-sm-4 flex-column ">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" v-model="roomVIP" id="roomVIP">
+                                    <label class="form-check-label" for="roomVIP">roomVIP</label>
+                                </div>
+                            </div> -->
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6 mt-4"> <button @click="updateForm()" type="submit" class="btn-block btn-primary">Request for
+                                    Update</button> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script setup>
+import { useStationsStore } from '../../stores/Stations/Stations';
+import { useUsersStore } from '../../stores/Users/Users';
+import { ref } from 'vue';
+const stationsStore = useStationsStore();
+const userStore=useUsersStore();
+// console.log(userStore.usersObjec);
+
+// let stationName=stationsStore.stationsObject.station[0].name
+// let stationLocation=stationsStore.stationsObject.station[0].location
+// let country=stationsStore.stationsObject.station[0].country
+let driver=ref()
+let security=ref()
+let manager=ref('')
+let engineer=ref('')
+
+
+
+
+
+const servantIds= ref([])
+
+const updateForm = async () => {
+    
+    servantIds.value.push(driver.value)
+    servantIds.value.push(security.value)
+    servantIds.value.push(manager.value)
+
+    const obj = {
+        id:stationsStore.stationsObject.station[0]._id,
+        name: stationsStore.stationsObject.station[0].name,
+        location: stationsStore.stationsObject.station[0].location,
+        country:stationsStore.stationsObject.station[0].country,
+        servantIds:servantIds.value,
+        engineer:engineer.value,
+        isActive:stationsStore.stationsObject.station[0].isActive,
+        security:stationsStore.stationsObject.station[0].security,
+        canteen:stationsStore.stationsObject.station[0].canteen,
+        restRoom:stationsStore.stationsObject.station[0].restRoom,
+        emergencyRoom:stationsStore.stationsObject.station[0].emergencyRoom,
+
+
+    }
+    // await stationsStore.updateStationAction(obj);
+   console.log(obj);
+
+    // name.value = "";
+    // countryName.value="";
+    // languageSymbol.value = "";
+    // isActive.value = "";
+    // isEnable.value = "";
+
+   
+}
+
+
+
+// formatRole
+// function formatRole(){
+//     userStore.usersObjec.data.filter(i=>i.role=='manager')
+// }
+</script>
+
+
+
+
+
+
+% ///////////////////// side bar
+<template>
+    <!-- <div class="w-100 d-flex flex-column align-items-center align-items-sm-start pt-2 text-white"> -->
+       
+        <!-- <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu"> -->
+            <div class="nav-pills">
+            <ul>
+            <li class="nav-item">
+                <router-link to="/dashboard/allusers" class="nav-link px-0"><i class="bi bi-person-lines-fill pe-2"></i> All Users</router-link>
+
+            </li>
+            <li class="nav-item">
+                <!-- <router-link to="/allcomplans" class="nav-link px-0">  All Complains</router-link> -->
+
+            </li>
+
+            <li class="nav-item">
+                <router-link to="/dashboard/reviews" class="nav-link px-0"><i class="bi bi-chat-quote-fill"></i> All Reviews</router-link>
+
+            </li>
+
+            <li class="nav-item">
+                <router-link to="/dashboard/stations" class="nav-link px-0"><i class="bi bi-houses"></i> Stations</router-link>
+
+            </li>
+
+            <li class="nav-item">
+                <router-link to="/dashboard/passengerbooking" class="nav-link px-0"><i class="bi bi-people-fill"></i> Passenger Booking</router-link>
+                    </li>
+
+                    <li class="nav-item">
+                <router-link to="/dashboard/pendingbooking" class="nav-link px-0"><i class="bi bi-bookmarks-fill"></i> Pending Booking</router-link>
+
+            </li>
+            
+                    <li class="nav-item">
+                        <!-- <router-link to="/trains" class="nav-link px-0"><i class="bi bi-train-front-fill"></i> All Trains</router-link> -->
+                    </li>
+                    <li>
+                        <router-link to="/dashboard/createtrain" class="nav-link px-0"><i class="bi bi-train-lightrail-front"></i> Create Trains</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/dashboard/alltrips" class="nav-link px-0"><i class="bi bi-train-lightrail-front"></i> All Trips</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/dashboard/createtrips" class="nav-link px-0"><i class="bi bi-train-lightrail-front"></i> Create Trips</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/dashboard/alltickets" class="nav-link px-0"><i class="bi bi-train-lightrail-front"></i> All Tickets</router-link>
+                    </li>
+        </ul>
+    </div>
+    <!-- </ul> -->
+        <hr>
+        
+    <!-- </div> -->
+</template>
+
+<script setup>
+
+</script>
+
+<style scoped>
+.nav-link {
+    /* display: block; */
+    padding: 0.5rem 1rem;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+
+.nav-pills{
+    position: fixed;
+    top: 5rem;
+}
+a.router-link-active{
+    /* color: red; */
+    background-color: #3bc47e;
+
+}
+ul li{
+    width: 100%;
+}
+ul li a{
+    padding-left: 2rem !important;
+    padding-right: 4rem !important
+
+
+}
+
+</style>
