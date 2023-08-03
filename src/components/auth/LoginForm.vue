@@ -10,7 +10,10 @@
                 <label for="email" class="placeholder">Email</label>
             </div>
             <div class="input-container ic2">
-                <input id="" class="input" type="password" v-model="password" placeholder=" " />
+                <input v-if="showPassword" id="" class="input" type="text" v-model="password" placeholder=" " />
+                <input v-else id="" class="input" type="password" v-model="password" placeholder=" " />
+                 <input class="button" @click="toggleShow" type="checkbox"><label for="passworid"  ></label>
+        
                 <div class="cut cut-short"></div>
                 <label for="password" class="placeholder">password</label>
             </div>
@@ -28,8 +31,12 @@ import { ref } from 'vue';
 import { useAuthStore } from '../../stores/Auth/Auth';
 import { RouterLink } from "vue-router";
 
-const authStore = useAuthStore();
+const showPassword=ref(false)
 
+function toggleShow() { 
+    showPassword.value=!showPassword.value
+ }
+const authStore = useAuthStore();
 const email = ref('');
 const password = ref('');
 

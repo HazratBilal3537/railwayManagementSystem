@@ -1,8 +1,13 @@
 <template>
-       
+       <Suspense>
+        <template #default>
     <asyncShowUers></asyncShowUers>
+</template>
+<template #fallback>
+   <h1>Looding...</h1>
+</template>
+</Suspense>
     </template>
-    
     
     <script setup>
     import { defineAsyncComponent } from 'vue';
